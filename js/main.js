@@ -18,7 +18,7 @@ require.config({
 
 require([
     //load the app module to difine the functions
-    'app',
+    'app'
 ], function(App){
     //'app' dependency is passes in as 'App'
     App.initialize();
