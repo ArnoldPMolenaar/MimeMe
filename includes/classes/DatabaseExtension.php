@@ -46,4 +46,98 @@ class DatabaseExtension {
         }
         return $statement;
     }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function getUsers(){
+        $aUsers = [];
+
+        if($statement = $this->PrepareQuery("SELECT * FROM `mm_accounts`")){
+            $statement->execute();
+            $statement->bind_result($id, $instagramUsername, $instagramId, $instagramPicture, $instagramName, $password, $rank);
+            while($statement->fetch()){
+                array_push($aUsers, [
+                    'id' => $id,
+                    'instagramUsername' => $instagramUsername,
+                    'instagramId' => $instagramId,
+                    'instagramPicture' => $instagramPicture,
+                    'instagramName' => $instagramName,
+                    'password' => $password,
+                    'rank' => $rank
+                ]);
+            }
+            $statement->close();
+        }
+
+        return $aUsers;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws Exception
+     */
+    public function getUser($id){
+        $aUser = null;
+
+        if($statement = $this->PrepareQuery("SELECT * FROM `mm_accounts` WHERE `id` = $id")){
+            $statement->execute();
+            $statement->bind_result($id, $instagramUsername, $instagramId, $instagramPicture, $instagramName, $password, $rank);
+            $statement->fetch();
+            $aUser = [
+                'id' => $id,
+                'instagramUsername' => $instagramUsername,
+                'instagramId' => $instagramId,
+                'instagramPicture' => $instagramPicture,
+                'instagramName' => $instagramName,
+                'password' => $password,
+                'rank' => $rank
+            ];
+            $statement->close();
+        }
+
+        return $aUser;
+    }
+
+    /**
+     * @param $instagramUsername
+     * @param $instagramId
+     * @param $instagramPicture
+     * @param $instagramName
+     * @param $password
+     * @return bool
+     * @throws Exception
+     */
+    public function setUser($instagramUsername, $instagramId, $instagramPicture, $instagramName, $password){
+        if($statement = $this->PrepareQuery("INSERT INTO `mm_accounts` (`instagram-username`, `instagram-id`, `instagram-picture`, `instagram-name`, `password`, `ranking`) VALUES ('".$this->Mysqli_RealEscapString($instagramUsername)."', '".$this->Mysqli_RealEscapString($instagramId)."', '".$this->Mysqli_RealEscapString($instagramPicture)."', '".$this->Mysqli_RealEscapString($instagramName)."', '".sha1($password)."', 0)")){
+            $statement->execute();
+            $statement->close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $instagramUsername
+     * @param $instagramId
+     * @param $instagramPicture
+     * @param $instagramName
+     * @param $password
+     * @param $rank
+     * @return bool
+     * @throws Exception
+     */
+    public function updateUser($id, $instagramUsername, $instagramId, $instagramPicture, $instagramName, $password, $rank){
+        if($statement = $this->PrepareQuery("UPDATE `mm_accounts` SET `instagram-username` = '".$this->Mysqli_RealEscapString($instagramUsername)."', `instagram-id` = '".$this->Mysqli_RealEscapString($instagramId)."', `instagram-picture` = '".$this->Mysqli_RealEscapString($instagramPicture)."', `instagram-name` = '".$this->Mysqli_RealEscapString($instagramName)."', `password` = '".sha1($password)."', `ranking` = '".$this->Mysqli_RealEscapString($rank)."' WHERE `id` = ".$id."")){
+            $statement->execute();
+            $statement->close();
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
