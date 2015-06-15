@@ -3,7 +3,9 @@ require.config({
     shim :{
         bootstrap: { deps:['jquery'] },
         'jquery.appear': { deps:['jquery'] },
-        'jqBootstrapValidation': { deps:['jquery'] }
+        'jqBootstrapValidation': { deps:['jquery'] },
+        'instagram': { deps:['jquery'] },
+        'errorhandler': { deps:['jquery'] }
     },
     paths:{
         jquery: 'libs/jquery',
@@ -12,7 +14,10 @@ require.config({
         bootstrap: 'libs/bootstrap',
         modernizr: 'libs/modernizr.custom',
         'jquery.appear': 'libs/plugins/jquery.appear',
-        'jqBootstrapValidation': 'libs/plugins/jqBootstrapValidation'
+        'jqBootstrapValidation': 'libs/plugins/jqBootstrapValidation',
+        'instagram': 'classes/Instagram',
+        'errorhandler': 'classes/ErrorHandler',
+        'cookiehandler': 'classes/CookieHandler'
     }
 });
 
@@ -32,7 +37,10 @@ define([
     'modernizr',
     'bootstrap',
     'jquery.appear',
-    'jqBootstrapValidation'
+    'jqBootstrapValidation',
+    'instagram',
+    'errorhandler',
+    'cookiehandler'
 ], function($, _, Backbone){
     //pass in jQuery, underscore and backbone
     return {};

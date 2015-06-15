@@ -11,133 +11,59 @@
         <div class="container">
             <div class="row">
                 <div class="section-title text-center">
-                    <h3>Our Portfolio</h3>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate</p>
+                    <h3>Aanmelden</h3>
+                    <p>Meld je aan of login om gebruik te maken van MimeMe!</p>
                 </div>
             </div>
             <div class="row">
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/1.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
+                <div class="col-md-12">
+                    <form name="login" id="loginForm" novalidate>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Je Instagram gebruikersnaam *" id="login-name" required="required" rel="Vul je naam in om verder te gaan.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Wachtwoord *" id="login-password" required="required" rel="Vul je wachtwoord in om verder te gaan.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div class="alert-success" id="login-success"></div>
+                                <button type="submit" id="login-submit" class="btn btn-primary">Inloggen</button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>Aanmelden met Instagram</h3>
+                            <p>Ik ben nieuw en heb nog geen account! Meld je dan hieronder aan.</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/2.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
+                    <form name="register" id="registerForm" novalidate>
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Je Instagram gebruikersnaam *" id="register-name" required="required" rel="Vul je naam in om verder te gaan.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Wachtwoord *" id="register-password" required="required" rel="Vul je wachtwoord in om verder te gaan.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Wachtwoord bevestigen *" id="register-confirm-password" required="required" rel="Vul je wachtwoord in om verder te gaan.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div class="alert-success" id="register-success"></div>
+                                <button type="submit" id="register-submit" class="btn btn-primary"><i class="fa fa-instagram"></i> Aanmelden met Instagram</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/3.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/4.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/5.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/6.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/7.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/8.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/9.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/10.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/11.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="portfolio-item">
-                        <img src="images/portfolio/12.png" class="img-responsive" alt="...">
-                        <div class="portfolio-details text-center">
-                            <h4>Project Name</h4>
-                            <a href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /.row -->
+            </div>
         </div>
 
     </div>

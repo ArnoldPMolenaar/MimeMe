@@ -959,3 +959,16 @@ and (max-width : 991px) {
     padding: 20px;
     color: #fff;
 }
+
+/***** new CSS *******/
+#account-modal .form-group {
+    margin: 0 10% 15px 10%;
+}
+
+#account-modal .text-danger {
+    color: #c9302c;
+}
+
+#account-modal #register-success, #account-modal #login-success {
+    margin-bottom: 20px;
+}

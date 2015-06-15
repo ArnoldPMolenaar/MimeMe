@@ -79,26 +79,50 @@ class DatabaseExtension {
      * @return array
      * @throws Exception
      */
-    public function getUser($id){
+    public function getUser($instagramid){
         $aUser = null;
 
-        if($statement = $this->PrepareQuery("SELECT * FROM `mm_accounts` WHERE `id` = $id")){
+        if($statement = $this->PrepareQuery("SELECT * FROM `mm_accounts` WHERE `instagram-id` = $instagramid")){
             $statement->execute();
             $statement->bind_result($id, $instagramUsername, $instagramId, $instagramPicture, $instagramName, $password, $rank);
             $statement->fetch();
-            $aUser = [
-                'id' => $id,
-                'instagramUsername' => $instagramUsername,
-                'instagramId' => $instagramId,
-                'instagramPicture' => $instagramPicture,
-                'instagramName' => $instagramName,
-                'password' => $password,
-                'rank' => $rank
-            ];
+            if(!is_null($instagramId)) {
+                $aUser = [
+                    'id' => $id,
+                    'instagramUsername' => $instagramUsername,
+                    'instagramId' => $instagramId,
+                    'instagramPicture' => $instagramPicture,
+                    'instagramName' => $instagramName,
+                    'password' => $password,
+                    'rank' => $rank
+                ];
+            } else {
+                $aUser = false;
+            }
             $statement->close();
         }
 
         return $aUser;
+    }
+
+    /**
+     * @param $instagramUsername
+     * @param $password
+     * @return bool
+     * @throws Exception
+     */
+    public function getUserLogin($instagramUsername, $password){
+        if($statement = $this->PrepareQuery("SELECT `instagram-id` FROM `mm_accounts` WHERE `instagram-username` = '".$instagramUsername."' AND `password` = '".sha1($password)."'")){
+            $statement->execute();
+            $statement->bind_result($id);
+            $statement->fetch();
+            $statement->close();
+        }
+        if(!is_null($id)) {
+            return $id;
+        } else {
+            return false;
+        }
     }
 
     /**

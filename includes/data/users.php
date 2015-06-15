@@ -9,7 +9,7 @@ if($method == 'set' || $method == 'update'){
     $instagramId = $_GET['instagramid'];
     $instagramPicture = $_GET['instagrampicture'];
     $instagramName = $_GET['instagramname'];
-    $password = $_GET['password'];
+    $password = str_replace('_', ' ', $_GET['password']);
     $rank = $_GET['rank'];
 }
 
@@ -31,6 +31,11 @@ else if($method == 'set'){
 }
 else if($method == 'update'){
     $output = $databaseExtension->updateUser($id, $instagramUsername, $instagramId, $instagramPicture, $instagramName, $password, $rank);
+}
+else if($method == 'login'){
+    $loginName = $_GET['instagramname'];
+    $loginPassword = str_replace('_', ' ', $_GET['password']);
+    $output = $databaseExtension->getUserLogin($loginName, $loginPassword);
 }
 
 print json_encode($output);
