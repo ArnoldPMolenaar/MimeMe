@@ -26,6 +26,7 @@ define([
 
         app_router.on('defaultActions', function(actions){
             var indexView = new IndexView();
+            indexView.render();
             var aboutView = new AboutView();
             var accountView = new AccountView();
             var contactView = new ContactView();

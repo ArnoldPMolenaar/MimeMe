@@ -29,10 +29,17 @@
                 </div>
 
                 <div class="menu-item green">
+                    <% if(typeof userModel == 'undefined') { %>
                     <a href="#account-modal" data-toggle="modal">
                         <i class="fa fa-user"></i>
                         <p>Aanmelden</p>
                     </a>
+                    <% } else { %>
+                    <a id="destroy-account" data-toggle="modal">
+                        <i class="fa fa-user"></i>
+                        <p>Welkom <%= userModel.instagramName %>!<br> Uitloggen?</p>
+                    </a>
+                    <% } %>
                 </div>
 
                 <div class="menu-item light-red">

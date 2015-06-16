@@ -83,16 +83,14 @@ var Instagram = function(){
             if(getCallback != "false"){
                 //set cookie
                 var cookieHandler = new CookieHandler();
-                cookieHandler.createCookie('user-id', getCallback.replace('"', '').replace('"', ''), 20*365);
+                cookieHandler.createCookie('user-id', getCallback.replace('"', '').replace('"', ''), 1);
 
                 //show message
                 $succesEl.hide().text('U bent ingelogged u zult nu terug gestuurd worden naar de homepagina').slideDown();
 
                 //set timeout to read the message and go to the homescreen
                 setTimeout(function(){
-                    $('.close-modal').click();
-                    $succesEl.hide();
-                    $errorEl.hide();
+                    location.reload();
                 }, 4000);
             } else {
                 //user doesn't exists
