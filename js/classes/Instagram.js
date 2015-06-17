@@ -20,7 +20,7 @@ var Instagram = function(){
 
         //do instagram ajax call - search for the user
         $.ajax({
-            url: 'https://api.instagram.com/v1/users/search?q='+userName,
+            url: 'https://api.instagram.com/v1/users/search?q='+userName.replace(' ', '_'),
             dataType: 'jsonp',
             type: 'GET',
             data: {client_id: this.clientId},
@@ -39,7 +39,7 @@ var Instagram = function(){
 
                                 //we got a new user :)
                                 if(getCallback == "false"){
-                                    $succesEl.load('includes/data/users.php?method=set&instagramusername='+userData.username+'&instagramid='+userData.id+'&instagrampicture='+userData.profile_picture+'&instagramname='+userData.full_name.replace(' ', '_')+'&password='+password.replace(' ', '_')+'&rank=0', function(callback){
+                                    $succesEl.load('includes/data/users.php?method=set&instagramusername='+userData.username.replace(' ', '_')+'&instagramid='+userData.id+'&instagrampicture='+userData.profile_picture+'&instagramname='+userData.full_name.replace(' ', '_')+'&password='+password.replace(' ', '_')+'&rank=0', function(callback){
                                         if(callback == "true") {
                                             $succesEl.hide().text('Het is gelukt! U bent nu aangemeld bij MimeMe, U kunt voortaam inloggen met uw instagram naam en wachtwoord').slideDown();
                                         } else {

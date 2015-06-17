@@ -5,10 +5,10 @@ $method = $_GET['method'];
 $output = null;
 
 if($method == 'set' || $method == 'update'){
-    $instagramUsername = $_GET['instagramusername'];
+    $instagramUsername = str_replace('_', ' ', $_GET['instagramusername']);
     $instagramId = $_GET['instagramid'];
     $instagramPicture = $_GET['instagrampicture'];
-    $instagramName = $_GET['instagramname'];
+    $instagramName = str_replace('_', ' ', $_GET['instagramname']);
     $password = str_replace('_', ' ', $_GET['password']);
     $rank = $_GET['rank'];
 }

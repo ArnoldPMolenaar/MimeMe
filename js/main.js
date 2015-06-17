@@ -5,7 +5,8 @@ require.config({
         'jquery.appear': { deps:['jquery'] },
         'jqBootstrapValidation': { deps:['jquery'] },
         'instagram': { deps:['jquery'] },
-        'errorhandler': { deps:['jquery'] }
+        'errorhandler': { deps:['jquery'] },
+        'taskshandler': { deps:['jquery'] }
     },
     paths:{
         jquery: 'libs/jquery',
@@ -17,7 +18,8 @@ require.config({
         'jqBootstrapValidation': 'libs/plugins/jqBootstrapValidation',
         'instagram': 'classes/Instagram',
         'errorhandler': 'classes/ErrorHandler',
-        'cookiehandler': 'classes/CookieHandler'
+        'cookiehandler': 'classes/CookieHandler',
+        'taskshandler': 'classes/TasksHandler'
     }
 });
 
@@ -40,7 +42,8 @@ define([
     'jqBootstrapValidation',
     'instagram',
     'errorhandler',
-    'cookiehandler'
+    'cookiehandler',
+    'taskshandler'
 ], function($, _, Backbone){
     //pass in jQuery, underscore and backbone
     return {};

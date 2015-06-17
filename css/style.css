@@ -965,11 +965,11 @@ and (max-width : 991px) {
     margin: 0 10% 15px 10%;
 }
 
-#account-modal .text-danger {
+.text-danger {
     color: #c9302c;
 }
 
-#account-modal #register-success, #account-modal #login-success {
+#create-task-success, #account-modal #register-success, #account-modal #login-success {
     margin-bottom: 20px;
 }
 

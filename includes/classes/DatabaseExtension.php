@@ -164,4 +164,49 @@ class DatabaseExtension {
             return false;
         }
     }
+
+    /**
+     * *********************************************************************
+     * TASKS
+     * *********************************************************************
+     */
+
+    /**
+     * @param $accountId
+     * @param $title
+     * @param $description
+     * @param $hashtag
+     * @return bool
+     * @throws Exception
+     */
+    public function setTask($accountId, $title, $description, $hashtag){
+        if($statement = $this->PrepareQuery("INSERT INTO `mm_tasks` (`accountid`, `title`, `description`, `hashtag`, `votes`) VALUES ('".$this->Mysqli_RealEscapString($accountId)."', '".$this->Mysqli_RealEscapString($title)."', '".$this->Mysqli_RealEscapString($description)."', '".$this->Mysqli_RealEscapString($hashtag)."', 0)")){
+            $statement->execute();
+            $statement->close();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param $hashtag
+     * @return bool
+     * @throws Exception
+     */
+    public function existsTask($hashtag){
+        if($statement = $this->PrepareQuery("SELECT `hashtag` FROM `mm_tasks` WHERE `hashtag` = '".$hashtag."'")){
+            $statement->execute();
+            $statement->store_result();
+            $numberOfRows = $statement->num_rows;
+
+            if($numberOfRows >= 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+            $statement->close();
+        }
+    }
 }

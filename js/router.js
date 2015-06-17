@@ -34,6 +34,7 @@ define([
             var newsView = new NewsView();
             var serviceView = new ServiceView();
             var tasksView = new TasksView();
+            tasksView.render();
             var testimonialView = new TestimonialView();
         });
 

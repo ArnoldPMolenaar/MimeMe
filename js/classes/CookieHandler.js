@@ -1,4 +1,15 @@
+/**
+ * no constructer, it handels cookies for this application
+ * @constructor
+ */
 var CookieHandler = function(){
+    /**
+     * create the cookie
+     *
+     * @param name
+     * @param value
+     * @param days
+     */
     this.createCookie = function(name, value, days) {
         if (days) {
             var date = new Date();
@@ -9,6 +20,11 @@ var CookieHandler = function(){
         document.cookie = name+"="+value+expires+"; path=/";
     };
 
+    /**
+     * read the cookie
+     * @param name
+     * @returns {*}
+     */
     this.readCookie = function(name) {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
@@ -20,6 +36,10 @@ var CookieHandler = function(){
         return null;
     };
 
+    /**
+     * destroy the cookie
+     * @param name
+     */
     this.eraseCookie = function(name) {
         this.createCookie(name,"",-1);
     };
