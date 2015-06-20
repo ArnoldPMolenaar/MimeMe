@@ -3,14 +3,23 @@ define([
     'underscore',
     'backbone',
     'models/user',
+    'models/map',
+    'views/map',
+    'collections/photo',
     'text!templates/tasks.html'
-], function($, _, Backbone, UserModel, TasksTemplate){
+], function($, _, Backbone, UserModel, MapModel, MapView, photoCollection, TasksTemplate){
     var tasksView = Backbone.View.extend({
         el: $('#tasks-page'),
+        /**
+         * initialize the tasks object
+         */
         initialize: function(){
-            this.template = _.template(TasksTemplate);
-            $(this.$el).html(this.template);
+            //render the view
+            this.render();
         },
+        /**
+         * render the tasks object
+         */
         render: function(){
             //check login status
             var cookieHandler = new CookieHandler();
@@ -29,34 +38,59 @@ define([
                     that.userModel.attributes.password = object.password;
                     that.userModel.attributes.ranking = object.rank;
 
-                    var data = {
-                        userModel: that.userModel.attributes
-                    };
-
-                    that.template = _.template(TasksTemplate, data);
-                    $(that.$el).html(that.template);
-
-                    $('#createTaskForm').on('submit', function(e){
-                        e.preventDefault();
-
-                        var errorHandler = new ErrorHandler();
-                        if(errorHandler.showErrorForInput('#task-name') == false && errorHandler.showErrorForInput('#task-description') == false && errorHandler.showErrorForInput('#task-hashtag') == false){
-                            $('.text-danger').slideUp();
-
-                            var tasksHandler = new TasksHandler();
-                            tasksHandler.insertTask(
-                                data.userModel.id,
-                                $('#task-name').val(),
-                                $('#task-description').val(),
-                                $('#task-hashtag').val(),
-                                $('#task-hashtag').parent().find('.text-danger'),
-                                $('#create-task-success')
-                            );
-                        }
-
-                    });
+                    //get tasks put user model in it
+                    that.getTasks(that.userModel);
                 });
+            } else {
+                //show only all tasks
+                this.getTasks();
             }
+        },
+        /**
+         * get tasks for the tasks view
+         * @param userModel
+         */
+        getTasks: function(userModel){
+
+            //some default variables
+            var data = null;
+            var that = this;
+            var instagram = new Instagram();
+
+            //get all tasks from the database
+            $.get('includes/data/tasks.php?method=get', function(tasks) {
+
+                //convert json to objects
+                var tasksObjects = JSON.parse(tasks);
+
+                //check if usermodel is defined
+                if(typeof userModel != 'undefined') {
+                    data = {
+                        userModel: userModel,
+                        tasks: tasksObjects
+                    };
+                } else {
+                    data = {
+                        tasks: tasksObjects
+                    }
+                }
+
+                //load template
+                that.template = _.template(TasksTemplate, data);
+                $(that.$el).html(that.template);
+
+                if(typeof userModel != 'undefined') {
+                    var eventHandler = new EventHandler();
+                    eventHandler.createTaskListner(data.userModel.id);
+                }
+
+                $.each(tasksObjects, function(index){
+
+                    var hashtagEncoded = tasksObjects[index].hashtag.replace('#', '');
+
+                    instagram.getInstagramData(MapModel, MapView, photoCollection, hashtagEncoded);
+                });
+            });
         }
     });
 

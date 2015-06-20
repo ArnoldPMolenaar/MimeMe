@@ -40,144 +40,30 @@
                 </form>
             </div>
             <% } %>
-                <!--
+
+            <div class="row">
+                <div class="section-title text-center">
+                    <h3>Opdrachten van MimeMe</h3>
+                    <p>Bekijk hier alle opdrachten die gebruikers in MimeMe gemaakt hebben. Meld je aan en maak je eigen opdracht!</p>
+                </div>
+            </div>
+            <% if(typeof tasks != 'undefined') { %>
+            <div id="task-rows" class="row">
+                <% _.each(tasks, function(task) { %>
                 <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/manage-1.png" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
+                    <div class="task">
+                        <div id="<%= task.hashtag.replace('#', '') %>" class="google-maps" style="width: 500px; height: 500px;"></div>
+                        <span class="task-details">
+                            <h4><%= task.title %></h4>
+                            <div class="designation"><%= task.description %></div>
+                            <button id="open-task" class="btn btn-primary">Bekijk de opdracht</button>
+                        </span>
                     </div>
                 </div>
+                <% }) %>
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/manage-2.png" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/manage-3.png" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/manage-4.png" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/team-1.jpg" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/team-2.jpg" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/team-3.jpg" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="team-member">
-                        <img src="images/team/team-4.jpg" class="img-responsive" alt="">
-                        <div class="team-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>-->
-
-            <!--</div><!-- /.row -->
+            </div><!-- /.row -->
+            <% } %>
         </div>
 
     </div>

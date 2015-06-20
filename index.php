@@ -28,6 +28,7 @@
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
         <!-- Initialize backbone -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJNssaeG3AzymaCp10UdB-A8AbJ7OZfII&sensor=false"></script>
         <script data-main="js/main" src="js/libs/require.js"></script>
 
         <!--[if lt IE 9]>

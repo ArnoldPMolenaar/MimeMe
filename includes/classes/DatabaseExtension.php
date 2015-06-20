@@ -209,4 +209,27 @@ class DatabaseExtension {
             $statement->close();
         }
     }
+
+    public function getTasks(){
+        $tasks = array();
+
+        if($statement = $this->PrepareQuery("SELECT * FROM `mm_tasks`")){
+            $statement->execute();
+            $statement->bind_result($id, $accountId, $title, $description, $hashtag, $votes);
+            while($statement->fetch()){
+                array_push($tasks, array(
+                    'id' => $id,
+                    'accountid' => $accountId,
+                    'title' => $title,
+                    'description' => $description,
+                    'hashtag' => $hashtag,
+                    'votes' => $votes
+                ));
+            }
+
+            $statement->close();
+        }
+
+        return $tasks;
+    }
 }

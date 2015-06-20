@@ -666,13 +666,13 @@ and (max-width : 991px) {
 /**** Start Team Member Section ****/
 
 
-.team-member {
+.task {
     position: relative;
     width: 100%;
     margin-bottom: 30px;
 }
 
-.team-details {
+.task-details {
     font-family: 'Open Sans', sans-serif;
     padding-left: 10px;
     position: absolute;
@@ -683,12 +683,12 @@ and (max-width : 991px) {
     opacity: 0;
 }
 
-.team-member img {
+.task img {
     width: 100%;
     height: auto;
 }
 
-.team-details h4 {
+.task-details h4 {
     font-size: 25px;
     font-weight: 300;
     color: #FF432E;
@@ -698,23 +698,23 @@ and (max-width : 991px) {
     padding-top: 20%;
 }
 
-.team-details .designation {
+.task-details .designation {
     font-size: 16px;
     font-weight: 300;
     color: #fff;
     text-align: center;
 }
 
-.team-details ul {
+.task-details ul {
     padding-top: 40%;
 }
-.team-details li {
+.task-details li {
     display: inline-block;
     list-style: none;
     padding-right: 10px;
 }
 
-.team-details li a {
+.task-details li a {
     padding: 5px 8px;
     background: #FF432E;
     color: #fff;
@@ -724,7 +724,7 @@ and (max-width : 991px) {
     border-radius: 2px;
 }
 
-.team-member:hover .team-details {
+.task:hover .task-details {
     opacity: 1;
     -webkit-animation: pulse;
     animation: pulse;
@@ -975,4 +975,16 @@ and (max-width : 991px) {
 
 #destroy-account {
     cursor: pointer;
+}
+
+.task {
+    height: 270px;
+    width: 270px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.google-maps {
+    height: 100%;
+    with: 100%;
 }

@@ -99,4 +99,80 @@ var Instagram = function(){
         });
     };
 
+    /**
+     * get instagram data
+     * @param hashtag
+     */
+    this.getInstagramData = function(MapModel, MapView, photoCollection, hashtag){
+        var that = this;
+
+        $.ajax({
+            url: 'https://api.instagram.com/v1/tags/'+hashtag+'/media/recent',
+            dataType: 'jsonp',
+            type: 'GET',
+            data: {client_id: this.clientId},
+            success: function (data) {
+
+                var instagramData = [];
+
+                $.each(data.data, function(index){
+                    instagramData.push({
+                        hashtag: hashtag,
+                        username: data.data[index].user.username,
+                        photo: data.data[index].images.thumbnail.url,
+                        likes: data.data[index].likes.count,
+                        locName: data.data[index].location.name,
+                        latitude: data.data[index].location.latitude,
+                        longitude: data.data[index].location.longitude
+                    });
+                });
+
+                that.onDataLoaded(MapModel, MapView, photoCollection, instagramData);
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    };
+
+    /**
+     * lets load google maps if all task data and instagram data is loaded
+     * @param data
+     */
+    this.onDataLoaded = function(MapModel, MapView, photoCollection, data){
+
+        //create a new collection for the objects
+        this.collection = new photoCollection();
+
+        //save data into variable
+        var objects = data;
+
+        //check if the variable is not empty
+        if(objects.length >= 0) {
+            //loop all photos and data
+            for(var i in objects){
+                //save object in the collection
+                this.collection.add({
+                    photo: objects[i].photo,
+                    locName: objects[i].locName,
+                    username: objects[i].username,
+                    likes: objects[i].likes,
+                    latitude: objects[i].latitude,
+                    longitude: objects[i].longitude
+                });
+            }
+        }
+
+        //create model
+        var map_model = new MapModel();
+        map_model.initMap({ coords: {latitude: 52.51, longitude: 3.15} });
+
+        //set the model to the view
+        var map_view = new MapView({model: map_model}, {id: data[0].hashtag}, {markerCollection: this.collection});
+
+        //render Google Maps
+        map_view.render();
+    };
+
 };
