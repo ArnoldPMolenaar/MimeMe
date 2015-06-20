@@ -11,151 +11,30 @@
         <div class="container">
             <div class="row">
                 <div class="section-title text-center">
-                    <h3>Our Expert Team</h3>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate</p>
+                    <h3>LeaderBoards</h3>
+                    <p>De leaderboards wordt berkent op hoe veel je anticipeerd bij alle opdrachten</p>
                 </div>
             </div>
             <div class="row">
+                <div class="skill-shortcode">
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/manage-1.png" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
+                    <!-- Progress Bar -->
+                    <% _.each(users.models, function(user){ %>
+                    <div class="skill">
+                        <p><%= user.attributes.instagramName.replace('_', ' ') %></p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar"  data-percentage="<%= (parseInt(user.attributes.ranking) / parseInt(taskCount)) * 100 %>">
+                                <span class="progress-bar-span" ><%= (parseInt(user.attributes.ranking) / parseInt(taskCount)) * 100 %>%</span>
+                                <span class="sr-only"><%= (parseInt(user.attributes.ranking) / parseInt(taskCount)) * 100 %>% in de leaderboards</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <% }) %>
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/manage-2.png" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/manage-3.png" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/manage-4.png" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/team-1.jpg" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/team-2.jpg" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/team-3.jpg" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="task">
-                        <img src="images/team/team-4.jpg" class="img-responsive" alt="">
-                        <div class="task-details">
-                            <h4>John Doe</h4>
-                            <div class="designation">Senior Web Developer</div>
-                            <ul style="text-align: center;">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /.row -->
+            </div>
         </div>
 
     </div>
 </div>
-<!-- End Team Member Section -->
+<!-- Start Leaderboards Section -->

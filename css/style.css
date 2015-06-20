@@ -987,7 +987,7 @@ and (max-width : 991px) {
 
 .google-maps {
     height: 100%;
-    with: 100%;
+    width: 100%;
 }
 
 .btn-task {

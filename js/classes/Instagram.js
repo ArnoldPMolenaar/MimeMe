@@ -116,18 +116,20 @@ var Instagram = function(){
                 var instagramData = [];
 
                 $.each(data.data, function(index){
-                    instagramData.push({
-                        hashtag: hashtag,
-                        username: data.data[index].user.username,
-                        photo: data.data[index].images.thumbnail.url,
-                        likes: data.data[index].likes.count,
-                        locName: data.data[index].location.name,
-                        latitude: data.data[index].location.latitude,
-                        longitude: data.data[index].location.longitude
-                    });
+                    if(data.data[index].location != null) {
+                        instagramData.push({
+                            hashtag: hashtag,
+                            username: data.data[index].user.username,
+                            photo: data.data[index].images.thumbnail.url,
+                            likes: data.data[index].likes.count,
+                            locName: data.data[index].location.name,
+                            latitude: data.data[index].location.latitude,
+                            longitude: data.data[index].location.longitude
+                        });
+                    }
                 });
 
-                that.onDataLoaded(MapModel, MapView, photoCollection, instagramData);
+                that.onDataLoaded(MapModel, MapView, photoCollection, instagramData, hashtag);
 
             },
             error: function (data) {
@@ -140,7 +142,7 @@ var Instagram = function(){
      * lets load google maps if all task data and instagram data is loaded
      * @param data
      */
-    this.onDataLoaded = function(MapModel, MapView, photoCollection, data){
+    this.onDataLoaded = function(MapModel, MapView, photoCollection, data, hashtag){
 
         //create a new collection for the objects
         this.collection = new photoCollection();
@@ -169,7 +171,11 @@ var Instagram = function(){
         map_model.initMap({ coords: {latitude: 52.51, longitude: 3.15} });
 
         //set the model to the view
-        var map_view = new MapView({model: map_model}, {id: data[0].hashtag}, {markerCollection: this.collection});
+        if(objects.length > 0) {
+            var map_view = new MapView({model: map_model}, {id: data[0].hashtag}, {markerCollection: this.collection});
+        } else {
+            var map_view = new MapView({model: map_model}, {id: hashtag}, {markerCollection: this.collection});
+        }
 
         //render Google Maps
         map_view.render();

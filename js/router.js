@@ -3,17 +3,13 @@ define([
     'underscore',
     'backbone',
     'views/index',
-    'views/about',
     'views/account',
     'views/contact',
     'views/leaderboards',
-    'views/news',
-    'views/service',
     'views/tasks',
-    'views/testimonial',
     'modernizr',
     'bootstrap'
-], function($, _, Backbone, IndexView, AboutView, AccountView, ContactView, LeaderboardsView, NewsView, ServiceView, TasksView, TestimonialView){
+], function($, _, Backbone, IndexView, AccountView, ContactView, LeaderboardsView, TasksView){
     var AppRouter = Backbone.Router.extend({
         routes:{
             //default rout URL
@@ -27,14 +23,10 @@ define([
         app_router.on('defaultActions', function(actions){
             var indexView = new IndexView();
             indexView.render();
-            var aboutView = new AboutView();
             var accountView = new AccountView();
             var contactView = new ContactView();
             var leaderboardsView = new LeaderboardsView();
-            var newsView = new NewsView();
-            var serviceView = new ServiceView();
             var tasksView = new TasksView();
-            var testimonialView = new TestimonialView();
         });
 
         app_router.trigger('defaultActions');

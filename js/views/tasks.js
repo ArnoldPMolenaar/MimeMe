@@ -89,7 +89,7 @@ define([
                 $(that.$el).html(that.template);
 
                 if(typeof userModel != 'undefined') {
-                    eventHandler.createTaskListner(data.userModel.id);
+                    eventHandler.createTaskListner(data.userModel.attributes.id);
                 }
 
                 //loop true tasks

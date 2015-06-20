@@ -10,6 +10,7 @@ var TasksHandler = function(){
      */
     this.insertTask = function(accountId, title, description, hashtag, $errorEL, $successEl){
         var hashtagEncode = hashtag.replace('#', '%23');
+
         //check if tasks allready exists
         $.get('includes/data/tasks.php?method=exists&hashtag='+hashtagEncode, function(data) {
             if(data == 'false'){

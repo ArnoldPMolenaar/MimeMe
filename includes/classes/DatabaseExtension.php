@@ -52,7 +52,7 @@ class DatabaseExtension {
      * @throws Exception
      */
     public function getUsers(){
-        $aUsers = [];
+        $aUsers = array();
 
         if($statement = $this->PrepareQuery("SELECT * FROM `mm_accounts`")){
             $statement->execute();
@@ -180,7 +180,7 @@ class DatabaseExtension {
      * @throws Exception
      */
     public function setTask($accountId, $title, $description, $hashtag){
-        if($statement = $this->PrepareQuery("INSERT INTO `mm_tasks` (`accountid`, `title`, `description`, `hashtag`, `votes`) VALUES ('".$this->Mysqli_RealEscapString($accountId)."', '".$this->Mysqli_RealEscapString($title)."', '".$this->Mysqli_RealEscapString($description)."', '".$this->Mysqli_RealEscapString($hashtag)."', 0)")){
+        if($statement = $this->PrepareQuery("INSERT INTO `mm_tasks` (`accountid`, `title`, `description`, `hashtag`, `votes`) VALUES (".$accountId.", '".$this->Mysqli_RealEscapString($title)."', '".$this->Mysqli_RealEscapString($description)."', '".$this->Mysqli_RealEscapString($hashtag)."', 0)")){
             $statement->execute();
             $statement->close();
             return true;
@@ -238,6 +238,31 @@ class DatabaseExtension {
         return $tasks;
     }
 
+    /**
+     * get task Count
+     * @return number
+     * @throws Exception
+     */
+    public function getTasksCount(){
+        $taskCount = 0;
+
+        if($statement = $this->PrepareQuery("SELECT `id` FROM `mm_tasks`")){
+            $statement->execute();
+            $statement->store_result();
+            $taskCount = $statement->num_rows;
+            $statement->close();
+        }
+
+        return $taskCount;
+    }
+
+    /**
+     * update task with votes
+     * @param $id
+     * @param $votes
+     * @return bool
+     * @throws Exception
+     */
     public function updateVote($id, $votes){
         if($statement = $this->PrepareQuery("UPDATE `mm_tasks` SET `votes`= $votes WHERE `id` = $id")){
             $statement->execute();
@@ -246,5 +271,35 @@ class DatabaseExtension {
         } else {
             return false;
         }
+    }
+
+    /**
+     * update the user ranks when the leaderboards is opened
+     * @return bool
+     * @throws Exception
+     */
+    public function updateRankingOfUsers(){
+        $tasks = $this->getTasks();
+        $users = $this->getUsers();
+
+        foreach($users as $user){
+            $newRanking = 0;
+
+            foreach($tasks as $task){
+                if($task['accountid'] == $user['id']){
+                    $newRanking += 1;
+                }
+            }
+
+            if($statement2 = $this->PrepareQuery("UPDATE `mm_accounts` SET `ranking`= $newRanking WHERE `id` = ".$user['id']."")) {
+                $statement2->execute();
+                $statement2->close();
+            } else {
+                return false;
+            }
+
+        }
+
+        return true;
     }
 }
