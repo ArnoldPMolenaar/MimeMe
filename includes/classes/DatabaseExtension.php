@@ -210,6 +210,11 @@ class DatabaseExtension {
         }
     }
 
+    /**
+     * get all tasks
+     * @return array
+     * @throws Exception
+     */
     public function getTasks(){
         $tasks = array();
 
@@ -231,5 +236,15 @@ class DatabaseExtension {
         }
 
         return $tasks;
+    }
+
+    public function updateVote($id, $votes){
+        if($statement = $this->PrepareQuery("UPDATE `mm_tasks` SET `votes`= $votes WHERE `id` = $id")){
+            $statement->execute();
+            $statement->close();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

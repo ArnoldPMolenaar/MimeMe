@@ -14,6 +14,14 @@ define([
          * initialize the tasks object
          */
         initialize: function(){
+            //create a vote cookie for every visitor to vote everyday on one a task
+            var cookieHandler = new CookieHandler();
+            var oldVoteCookie = cookieHandler.readCookie("vote");
+
+            if(oldVoteCookie == null) {
+                cookieHandler.createCookie("vote", 1, 1);
+            }
+
             //render the view
             this.render();
         },
@@ -93,6 +101,9 @@ define([
 
                     //add event click on the button
                     eventHandler.toggleTask('#open-task-'+tasksObjects[index].id);
+
+                    //add event handler for the like button
+                    eventHandler.voteTask('#like-'+tasksObjects[index].id, tasksObjects[index].id, tasksObjects[index].votes);
                 });
             });
         }

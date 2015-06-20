@@ -17,5 +17,8 @@ else if($method == 'set'){
 else if($method == 'exists'){
     $output = $databaseExtension->existsTask($_GET['hashtag']);
 }
+else if($method == 'vote'){
+    $output = $databaseExtension->updateVote($_GET['id'], $_GET['votes']);
+}
 
 print json_encode($output);

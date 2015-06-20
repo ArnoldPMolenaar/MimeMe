@@ -52,4 +52,37 @@ var EventHandler = function(){
             });
         });
     };
+
+    /**
+     * vote listner for the like button
+     * @param el
+     * @param id
+     * @param votes
+     */
+    this.voteTask = function(el, id, votes){
+
+        //init click event
+        $(el).on('click', function(){
+            //check cookie for access
+            var cookieHandler = new CookieHandler();
+            var cookieVote = cookieHandler.readCookie('vote');
+
+            if(cookieVote == 1) {
+                //update current vote
+                var newVotes = parseInt(votes) + 1;
+
+                //update database
+                $.get('includes/data/tasks.php?method=vote&id=' + id + '&votes=' + newVotes, function (callback) {
+                    if (callback == "true") {
+                        //update button
+                        $(el + ' .vote').html(newVotes);
+
+                        //create new cookie where user can't vote
+                        cookieHandler.eraseCookie("vote");
+                        cookieHandler.createCookie("vote", 0, 1);
+                    }
+                });
+            }
+        });
+    }
 };

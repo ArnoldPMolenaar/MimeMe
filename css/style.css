@@ -674,7 +674,6 @@ and (max-width : 991px) {
 
 .task-details {
     font-family: 'Open Sans', sans-serif;
-    padding-left: 10px;
     position: absolute;
     top: 0;
     width: 100%;
@@ -695,7 +694,7 @@ and (max-width : 991px) {
     font-family: 'Oswald', sans-serif;
     text-transform: none;
     text-align: center;
-    padding-top: 20%;
+    padding-top: 5%;
 }
 
 .task-details .designation {
@@ -703,6 +702,8 @@ and (max-width : 991px) {
     font-weight: 300;
     color: #fff;
     text-align: center;
+    height: 40%;
+    overflow: hidden;
 }
 
 .task-details ul {
@@ -990,7 +991,7 @@ and (max-width : 991px) {
 }
 
 .btn-task {
-    margin: 0 15%;
+    margin: 0 18% 5% 18%;
 }
 
 .full-map {
@@ -1006,6 +1007,12 @@ and (max-width : 991px) {
     height: auto;
     margin-bottom: 10px;
     vertical-align: top;
+}
+
+.votes {
+    float: left;
+    vertical-align: bottom;
+    margin-top: 10px;
 }
 
 @media (max-width : 700px) {
