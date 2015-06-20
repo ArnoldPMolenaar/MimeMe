@@ -25,5 +25,31 @@ var EventHandler = function(){
             }
 
         });
-    }
-}
+    };
+
+    /**
+     * animate the google maps to make it bigger and use it to look for pictures on the map.
+     * Its a on toggle function so everything is handeld bij this function
+     * @param id
+     */
+    this.toggleTask = function(id){
+        $(id).on('click', function(){
+            //toggle between buttons
+            $('.task-details').css('display', 'block');
+            $(this).parent().css('display', 'none');
+            var self = $(this).parent().parent();
+
+            //animate the map
+            $('.task').animate({
+                height: 270,
+                width: 270
+            }, 1000, function() {
+                self.fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).animate({
+                    height: 400,
+                    width: 400
+                }, 1000);
+                $('.task').stop();
+            });
+        });
+    };
+};

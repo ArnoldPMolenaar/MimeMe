@@ -56,6 +56,7 @@ define([
             var data = null;
             var that = this;
             var instagram = new Instagram();
+            var eventHandler = new EventHandler();
 
             //get all tasks from the database
             $.get('includes/data/tasks.php?method=get', function(tasks) {
@@ -80,15 +81,18 @@ define([
                 $(that.$el).html(that.template);
 
                 if(typeof userModel != 'undefined') {
-                    var eventHandler = new EventHandler();
                     eventHandler.createTaskListner(data.userModel.id);
                 }
 
+                //loop true tasks
                 $.each(tasksObjects, function(index){
 
                     var hashtagEncoded = tasksObjects[index].hashtag.replace('#', '');
 
                     instagram.getInstagramData(MapModel, MapView, photoCollection, hashtagEncoded);
+
+                    //add event click on the button
+                    eventHandler.toggleTask('#open-task-'+tasksObjects[index].id);
                 });
             });
         }

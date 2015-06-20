@@ -17,7 +17,7 @@ define([
             this.id = '#' + this.objToString(id);
             this.collection = markerCollection;
 
-            $(this.el).addClass('google-maps');
+            $(this.el).addClass('google-maps img-responsive');
 
             //set the map object into the model
             this.model.set('map', new google.maps.Map(this.el, this.model.get('mapOptions')));
@@ -36,6 +36,7 @@ define([
         //render google maps bij replacing the id with the element
         render: function(){
             $(this.id).replaceWith(this.el);
+
             return this;
         },
         addMarkers: function(){

@@ -50,13 +50,13 @@
             <% if(typeof tasks != 'undefined') { %>
             <div id="task-rows" class="row">
                 <% _.each(tasks, function(task) { %>
-                <div class="col-md-3 col-sm-6">
+                <div class="task-box">
                     <div class="task">
-                        <div id="<%= task.hashtag.replace('#', '') %>" class="google-maps" style="width: 500px; height: 500px;"></div>
+                        <div id="<%= task.hashtag.replace('#', '') %>" class="google-maps img-responsive"></div>
                         <span class="task-details">
                             <h4><%= task.title %></h4>
                             <div class="designation"><%= task.description %></div>
-                            <button id="open-task" class="btn btn-primary">Bekijk de opdracht</button>
+                            <button id="open-task-<%= task.id %>" class="btn-task btn btn-primary">Bekijk de opdracht</button>
                         </span>
                     </div>
                 </div>
