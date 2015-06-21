@@ -84,5 +84,36 @@ var EventHandler = function(){
                 });
             }
         });
+    };
+
+    this.mailListener = function(id){
+        $(id).on('submit', function(e){
+            e.preventDefault();
+
+            var errorHandler = new ErrorHandler();
+
+            //check for empty fields
+            if(errorHandler.showErrorForInput('#contact-name') == false && errorHandler.showErrorForInput('#contact-email') == false && errorHandler.showErrorForInput('#contact-subject') == false && errorHandler.showErrorForInput('#contact-message') == false){
+                $('.text-danger').slideUp();
+
+                //get post data
+                var str = $(this).serialize();
+                var postData = str+'&method=send';
+
+                //send mail
+                $.ajax({
+                    type: "POST",
+                    url: 'includes/data/email.php',
+                    data: postData,
+                    success: function(data){
+                        $('#mail-success').hide().text('Uw email is verstuurd.').slideDown();
+                    },
+                    error: function(data){
+                        console.log(data)
+                    }
+                });
+
+            }
+        });
     }
 };

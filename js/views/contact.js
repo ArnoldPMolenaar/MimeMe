@@ -9,6 +9,9 @@ define([
         initialize: function(){
             this.template = _.template(ContactTemplate);
             $(this.$el).html(this.template);
+
+            var eventHandler = new EventHandler();
+            eventHandler.mailListener('#contactForm');
         }
     });
 
