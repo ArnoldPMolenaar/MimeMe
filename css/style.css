@@ -46,7 +46,6 @@ p {
 .btn-primary {
     border-color: #FF432E;
     background-color: #FF432E;
-    text-transform: uppercase;
     font-weight: 300;
     color: #fff;
     -webkit-border-radius:3px;
@@ -694,7 +693,6 @@ and (max-width : 991px) {
     font-family: 'Oswald', sans-serif;
     text-transform: none;
     text-align: center;
-    padding-top: 5%;
 }
 
 .task-details .designation {
@@ -702,7 +700,7 @@ and (max-width : 991px) {
     font-weight: 300;
     color: #fff;
     text-align: center;
-    height: 40%;
+    height: 50%;
     overflow: hidden;
 }
 
@@ -991,7 +989,7 @@ and (max-width : 991px) {
 }
 
 .btn-task {
-    margin: 0 18% 5% 18%;
+    margin: 0 0% 0% 1%;
 }
 
 .full-map {
@@ -1013,6 +1011,7 @@ and (max-width : 991px) {
     float: left;
     vertical-align: bottom;
     margin-top: 10px;
+    width: 100%;
 }
 
 @media (max-width : 700px) {
@@ -1022,4 +1021,16 @@ and (max-width : 991px) {
     .task {
         margin: 0 auto;
     }
+}
+
+#map, .map {
+    height: 310px;
+}
+
+.task-details strong.hashtag {
+    color: #FFF;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    display: block;
 }

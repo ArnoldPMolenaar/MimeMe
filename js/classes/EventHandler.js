@@ -1,5 +1,55 @@
 var EventHandler = function(){
     /**
+     * register a new account
+     */
+    this.registerAccount = function(){
+        $('#registerForm').on('submit', function(e){
+            e.preventDefault();
+
+            var errorHandler = new ErrorHandler();
+            var name = $('#register-name').val();
+
+            if(errorHandler.showErrorForInput('#register-name') == false && errorHandler.showErrorForInput('#register-password') == false && errorHandler.showErrorForInput('#register-confirm-password') == false){
+                if($('#register-password').val() == $('#register-confirm-password').val()) {
+                    $('.text-danger').slideUp();
+                    var instagram = new Instagram();
+                    instagram.searchForUserAndInsert(name, $('#register-password').val(), $('#register-name').parent().find('.text-danger'), $('#register-success'));
+                } else {
+                    $('#register-confirm-password').parent().find('.text-danger').hide().text('De wachtwoorden komen niet overeen').slideDown();
+                }
+            }
+        });
+    };
+    /**
+     * login a account
+     */
+    this.loginAccount = function(){
+        $('#loginForm').on('submit', function(e){
+            e.preventDefault();
+
+            var errorHandler = new ErrorHandler();
+
+            if(errorHandler.showErrorForInput('#login-name') == false && errorHandler.showErrorForInput('#login-password') == false){
+                $('.text-danger').slideUp();
+                var instagram = new Instagram();
+                instagram.loginUser($('#login-name').val(), $('#login-password').val(), $('#login-name').parent().find('.text-danger'), $('#login-success'));
+            }
+        });
+    };
+
+    /**
+     * logout account
+     */
+    this.logout = function(){
+        $('#destroy-account').on('click', function(){
+            if(confirm('Weet je zeker dat je wilt uitloggen?')){
+                var cookieHandler = new CookieHandler();
+                cookieHandler.eraseCookie('user-id');
+                location.reload();
+            }
+        });
+    };
+    /**
      * insert a new task to the database
      * @param userId
      */
@@ -36,8 +86,8 @@ var EventHandler = function(){
         $(id).on('click', function(){
             //toggle between buttons
             $('.task-details').css('display', 'block');
-            $(this).parent().css('display', 'none');
-            var self = $(this).parent().parent();
+            $(this).parent().parent().css('display', 'none');
+            var self = $(this).parent().parent().parent();
 
             //animate the map
             $('.task').animate({
@@ -86,6 +136,10 @@ var EventHandler = function(){
         });
     };
 
+    /**
+     * sends a mail on submit
+     * @param id
+     */
     this.mailListener = function(id){
         $(id).on('submit', function(e){
             e.preventDefault();

@@ -17,6 +17,7 @@ var Instagram = function(){
      */
     this.searchForUserAndInsert = function(userName, password, $errorEl, $succesEl){
         var userData = null;
+        var bUserExists = false;
 
         //do instagram ajax call - search for the user
         $.ajax({
@@ -31,7 +32,9 @@ var Instagram = function(){
                     $.each(data.data, function (index) {
 
                         if (data.data[index].username == userName) {
+
                             //user exists
+                            bUserExists = true;
                             userData = data.data[index];
 
                             //do dataBase insert if users doesn't exists allready
@@ -52,7 +55,7 @@ var Instagram = function(){
 
                             });
 
-                        } else {
+                        } else if (bUserExists == false) {
                             $errorEl.hide().text('Uw gebruikersnaam bestaat niet op instagram. Heb je een schrijffout gemaakt?').slideDown();
                         }
 
@@ -168,7 +171,7 @@ var Instagram = function(){
 
         //create model
         var map_model = new MapModel();
-        map_model.initMap({ coords: {latitude: 52.51, longitude: 3.15} });
+        map_model.initMap({ coords: {latitude: 53.0525992, longitude: 4.0066088} });
 
         //set the model to the view
         if(objects.length > 0) {

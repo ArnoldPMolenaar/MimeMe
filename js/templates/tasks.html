@@ -54,11 +54,12 @@
                     <div class="task">
                         <div id="<%= task.hashtag.replace('#', '') %>" class="google-maps img-responsive"></div>
                         <span class="task-details">
+                            <strong class="hashtag"><%= task.hashtag %></strong>
                             <h4><%= task.title %></h4>
                             <div class="designation"><%= task.description %></div>
-                            <button id="open-task-<%= task.id %>" class="btn-task btn btn-primary">Bekijk de opdracht</button>
                             <div class="votes">
                                 <button id="like-<%= task.id %>" class="btn-task btn btn-primary"><i class="fa fa-thumbs-o-up"></i> Like > <span class="vote"><%= task.votes %></span></button>
+                                <button id="open-task-<%= task.id %>" class="btn-task btn btn-primary">Bekijk de opdracht</button>
                             </div>
                         </span>
                     </div>
