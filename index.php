@@ -43,12 +43,8 @@
         <section id="main"></section>
         <section id="tasks-page"></section>
         <section id="account-page"></section>
-        <section id="about-page"></section>
-        <section id="service-page"></section>
         <section id="leaderboards-page"></section>
-        <section id="news-page"></section>
         <section id="contact-page"></section>
-        <section id="testimonial-page"></section>
         
     </body>
     
