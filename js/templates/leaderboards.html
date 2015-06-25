@@ -23,9 +23,9 @@
                     <div class="skill">
                         <p><%= user.attributes.instagramName.replace('_', ' ') %></p>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar"  data-percentage="<%= (parseInt(user.attributes.ranking) / parseInt(taskCount)) * 100 %>">
-                                <span class="progress-bar-span" ><%= (parseInt(user.attributes.ranking) / parseInt(taskCount)) * 100 %>%</span>
-                                <span class="sr-only"><%= (parseInt(user.attributes.ranking) / parseInt(taskCount)) * 100 %>% in de leaderboards</span>
+                            <div class="progress-bar" role="progressbar"  data-percentage="<%= (parseInt(user.attributes.rank) / parseInt(taskCount)) * 100 %>">
+                                <span class="progress-bar-span" ><%= (parseInt(user.attributes.rank) / parseInt(taskCount)) * 100 %>%</span>
+                                <span class="sr-only"><%= (parseInt(user.attributes.rank) / parseInt(taskCount)) * 100 %>% in de leaderboards</span>
                             </div>
                         </div>
                     </div>

@@ -11,9 +11,23 @@ define([
             $(this.$el).html(this.template);
 
             //setup submit events
-            var eventHandler = new EventHandler();
-            eventHandler.registerAccount();
-            eventHandler.loginAccount();
+            this.eventHandler = new EventHandler();
+        },
+        events: {
+            'submit #registerForm': 'registerAccount',
+            'submit #loginForm': 'loginAccount'
+        },
+        registerAccount: function(e){
+            e.preventDefault();
+            this.eventHandler.registerAccount();
+
+            return false;
+        },
+        loginAccount: function(e){
+            e.preventDefault();
+            this.eventHandler.loginAccount();
+
+            return false;
         }
     });
 

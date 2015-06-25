@@ -5,7 +5,8 @@ define([
     'models/user'
 ], function(_, Backbone, userModel){
     var userCollection = Backbone.Collection.extend({
-        model: userModel
+        model: userModel,
+        url: 'includes/data/users.php?method=get'
     });
 
     return userCollection;

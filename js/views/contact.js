@@ -10,8 +10,17 @@ define([
             this.template = _.template(ContactTemplate);
             $(this.$el).html(this.template);
 
-            var eventHandler = new EventHandler();
-            eventHandler.mailListener('#contactForm');
+            //eventHandler init
+            this.eventHandler = new EventHandler();
+        },
+        events : {
+            'submit #contactForm': 'mailListener'
+        },
+        mailListener: function(e){
+            e.preventDefault();
+            this.eventHandler.mailListener();
+
+            return false;
         }
     });
 

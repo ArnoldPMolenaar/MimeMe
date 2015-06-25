@@ -49,17 +49,17 @@
             </div>
             <% if(typeof tasks != 'undefined') { %>
             <div id="task-rows" class="row">
-                <% _.each(tasks, function(task) { %>
+                <% _.each(tasks.models, function(task) { %>
                 <div class="task-box">
                     <div class="task">
-                        <div id="<%= task.hashtag.replace('#', '') %>" class="google-maps img-responsive"></div>
+                        <div id="<%= task.attributes.hashtag.replace('#', '') %>" class="google-maps img-responsive"></div>
                         <span class="task-details">
-                            <strong class="hashtag"><%= task.hashtag %></strong>
-                            <h4><%= task.title %></h4>
-                            <div class="designation"><%= task.description %></div>
+                            <strong class="hashtag"><%= task.attributes.hashtag %></strong>
+                            <h4><%= task.attributes.title %></h4>
+                            <div class="designation"><%= task.attributes.description %></div>
                             <div class="votes">
-                                <button id="like-<%= task.id %>" class="btn-task btn btn-primary"><i class="fa fa-thumbs-o-up"></i> Like > <span class="vote"><%= task.votes %></span></button>
-                                <button id="open-task-<%= task.id %>" class="btn-task btn btn-primary">Bekijk de opdracht</button>
+                                <button id="like-<%= task.attributes.id %>" class="btn-task btn btn-primary"><i class="fa fa-thumbs-o-up"></i> Like > <span class="vote"><%= task.attributes.votes %></span></button>
+                                <button id="open-task-<%= task.attributes.id %>" class="btn-task btn btn-primary">Bekijk de opdracht</button>
                             </div>
                         </span>
                     </div>

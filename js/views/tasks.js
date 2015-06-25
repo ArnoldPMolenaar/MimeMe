@@ -5,9 +5,10 @@ define([
     'models/user',
     'models/map',
     'views/map',
+    'collections/task',
     'collections/photo',
     'text!templates/tasks.html'
-], function($, _, Backbone, UserModel, MapModel, MapView, photoCollection, TasksTemplate){
+], function($, _, Backbone, UserModel, MapModel, MapView, TaskCollection, photoCollection, TasksTemplate){
     var tasksView = Backbone.View.extend({
         el: $('#tasks-page'),
         /**
@@ -38,13 +39,13 @@ define([
                 $.get('includes/data/users.php?method=get&id=' + userId, function (getCallback) {
                     var object = JSON.parse(getCallback);
                     that.userModel = new UserModel();
-                    that.userModel.attributes.id = object.id;
-                    that.userModel.attributes.instagramUsername = object.instagramUsername;
-                    that.userModel.attributes.instagramId = object.instagramId;
-                    that.userModel.attributes.instagramPicture = object.instagramPicture;
-                    that.userModel.attributes.instagramName = object.instagramName.replace('_', ' ');
-                    that.userModel.attributes.password = object.password;
-                    that.userModel.attributes.ranking = object.rank;
+                    that.userModel.set('id', object.id);
+                    that.userModel.set('instagramUsername', object.instagramUsername);
+                    that.userModel.set('instagramId', object.instagramId);
+                    that.userModel.set('instagramPicture', object.instagramPicture);
+                    that.userModel.set('instagramName', object.instagramName.replace('_', ' '));
+                    that.userModel.set('password', object.password);
+                    that.userModel.set('ranking', object.rank);
 
                     //get tasks put user model in it
                     that.getTasks(that.userModel);
@@ -67,20 +68,18 @@ define([
             var eventHandler = new EventHandler();
 
             //get all tasks from the database
-            $.get('includes/data/tasks.php?method=get', function(tasks) {
-
-                //convert json to objects
-                var tasksObjects = JSON.parse(tasks);
+            this.collection = new TaskCollection();
+            this.collection.fetch().done(function(){
 
                 //check if usermodel is defined
                 if(typeof userModel != 'undefined') {
                     data = {
                         userModel: userModel,
-                        tasks: tasksObjects
+                        tasks: that.collection
                     };
                 } else {
                     data = {
-                        tasks: tasksObjects
+                        tasks: that.collection
                     }
                 }
 
@@ -93,18 +92,19 @@ define([
                 }
 
                 //loop true tasks
-                $.each(tasksObjects, function(index){
+                that.collection.each(function(model){
 
-                    var hashtagEncoded = tasksObjects[index].hashtag.replace('#', '');
+                    var hashtagEncoded = model.attributes.hashtag.replace('#', '');
 
                     instagram.getInstagramData(MapModel, MapView, photoCollection, hashtagEncoded);
 
                     //add event click on the button
-                    eventHandler.toggleTask('#open-task-'+tasksObjects[index].id);
+                    eventHandler.toggleTask('#open-task-'+model.attributes.id);
 
                     //add event handler for the like button
-                    eventHandler.voteTask('#like-'+tasksObjects[index].id, tasksObjects[index].id, tasksObjects[index].votes);
+                    eventHandler.voteTask('#like-'+model.attributes.id, model.attributes.id, model.attributes.votes);
                 });
+
             });
         }
     });

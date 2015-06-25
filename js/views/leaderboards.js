@@ -13,24 +13,8 @@ define([
 
             //get all ranking charts of all users
             $.get('includes/data/leaderboards.php?method=get', function (numberOfTasks) {
-                $.get('includes/data/users.php?method=get', function (users) {
-                    var userObjects = JSON.parse(users);
 
-                    for(var i in userObjects){
-
-                        //create user and add it to the collection
-                        self.collection.add({
-                            id: userObjects[i].id,
-                            instagramUsername: userObjects[i].instagramUsername,
-                            instagramId: userObjects[i].instagramId,
-                            instagramPicture: userObjects[i].instagramPicture,
-                            instagramName: userObjects[i].instagramName,
-                            password: userObjects[i].password,
-                            ranking: userObjects[i].rank
-                        });
-
-                    }
-
+                self.collection.fetch().done(function(){
                     var data = {
                         users: self.collection,
                         taskCount: numberOfTasks
@@ -41,6 +25,7 @@ define([
 
                     self.render();
                 });
+
             });
         },
         render: function(){

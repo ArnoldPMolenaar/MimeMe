@@ -5,9 +5,10 @@ define([
     'models/user',
     'models/map',
     'views/map',
+    'collections/task',
     'collections/photo',
     'text!templates/index.html'
-], function($, _, Backbone, UserModel, MapModel, MapView, photoCollection, IndexTemplate){
+], function($, _, Backbone, UserModel, MapModel, MapView, taskCollection, photoCollection, IndexTemplate){
     var indexView = Backbone.View.extend({
         el: $('#main'),
         initialize: function(){
@@ -25,13 +26,13 @@ define([
                 $.get('includes/data/users.php?method=get&id=' + userId, function (getCallback) {
                     var object = JSON.parse(getCallback);
                     that.userModel = new UserModel();
-                    that.userModel.attributes.id = object.id;
-                    that.userModel.attributes.instagramUsername = object.instagramUsername;
-                    that.userModel.attributes.instagramId = object.instagramId;
-                    that.userModel.attributes.instagramPicture = object.instagramPicture;
-                    that.userModel.attributes.instagramName = object.instagramName.replace('_', ' ');
-                    that.userModel.attributes.password = object.password;
-                    that.userModel.attributes.ranking = object.rank;
+                    that.userModel.set('id', object.id);
+                    that.userModel.set('instagramUsername', object.instagramUsername);
+                    that.userModel.set('instagramId', object.instagramId);
+                    that.userModel.set('instagramPicture', object.instagramPicture);
+                    that.userModel.set('instagramName', object.instagramName.replace('_', ' '));
+                    that.userModel.set('password', object.password);
+                    that.userModel.set('ranking', object.rank);
 
                     var data = {
                         userModel: that.userModel.attributes
@@ -47,7 +48,6 @@ define([
         },
         /**
          * get Google maps for carousel
-         * @param userModel
          */
         getGoogleMaps: function(){
 
@@ -56,16 +56,16 @@ define([
             var that = this;
             var instagram = new Instagram();
             var instagramData = [];
+            var count = 0;
 
-            //get all tasks from the database
-            $.get('includes/data/tasks.php?method=get', function(tasks) {
+            //fetch tasks
+            this.collection = new taskCollection();
+            this.collection.fetch().done(function(){
 
-                //convert json to objects
-                var tasksObjects = JSON.parse(tasks);
+                that.collection.each(function(model){
 
-                //loop true tasks
-                $.each(tasksObjects, function(index){
-                    var hashtagEncoded = tasksObjects[index].hashtag.replace('#', '');
+                    count++;
+                    var hashtagEncoded = model.attributes.hashtag.replace('#', '');
 
                     //get instagram data foreach task
                     $.ajax({
@@ -89,12 +89,9 @@ define([
                                 }
                             });
 
-                            var i = index;
-                            i++;
-
                             //each is done all data is loaded
-                            if(tasksObjects.length == i++){
-                                that.onDataLoaded(instagramData, 'map');
+                            if(that.collection.length == count){
+                                var googleMaps = new GoogleMaps(MapModel, MapView, photoCollection, instagramData, 'map');
                             }
 
                         },
@@ -102,46 +99,10 @@ define([
                             console.log(data);
                         }
                     });
+
                 });
+
             });
-        },
-        /**
-         * lets load google maps if all marker data is loaded
-         * @param data
-         */
-        onDataLoaded: function(data, id){
-
-            //create a new collection for the objects
-            this.collection = new photoCollection();
-
-            //save data into variable
-            var objects = data;
-
-            //check if the variable is not empty
-            if(objects.length >= 0) {
-                //loop all photos and data
-                for(var i in objects){
-                    //save object in the collection
-                    this.collection.add({
-                        photo: objects[i].photo,
-                        locName: objects[i].locName,
-                        username: objects[i].username,
-                        likes: objects[i].likes,
-                        latitude: objects[i].latitude,
-                        longitude: objects[i].longitude
-                    });
-                }
-            }
-
-            //create model
-            var map_model = new MapModel();
-            map_model.initMap({ coords: {latitude: 52.51, longitude: 5} });
-
-            //set the model to the view
-            var map_view = new MapView({model: map_model}, {id: id}, {markerCollection: this.collection});
-
-            //render Google Maps
-            map_view.render();
         }
     });
 

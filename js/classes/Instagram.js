@@ -132,56 +132,13 @@ var Instagram = function(){
                     }
                 });
 
-                that.onDataLoaded(MapModel, MapView, photoCollection, instagramData, hashtag);
+                var googleMpas = new GoogleMaps(MapModel, MapView, photoCollection, instagramData, hashtag);
 
             },
             error: function (data) {
                 console.log(data);
             }
         });
-    };
-
-    /**
-     * lets load google maps if all task data and instagram data is loaded
-     * @param data
-     */
-    this.onDataLoaded = function(MapModel, MapView, photoCollection, data, hashtag){
-
-        //create a new collection for the objects
-        this.collection = new photoCollection();
-
-        //save data into variable
-        var objects = data;
-
-        //check if the variable is not empty
-        if(objects.length >= 0) {
-            //loop all photos and data
-            for(var i in objects){
-                //save object in the collection
-                this.collection.add({
-                    photo: objects[i].photo,
-                    locName: objects[i].locName,
-                    username: objects[i].username,
-                    likes: objects[i].likes,
-                    latitude: objects[i].latitude,
-                    longitude: objects[i].longitude
-                });
-            }
-        }
-
-        //create model
-        var map_model = new MapModel();
-        map_model.initMap({ coords: {latitude: 53.0525992, longitude: 4.0066088} });
-
-        //set the model to the view
-        if(objects.length > 0) {
-            var map_view = new MapView({model: map_model}, {id: data[0].hashtag}, {markerCollection: this.collection});
-        } else {
-            var map_view = new MapView({model: map_model}, {id: hashtag}, {markerCollection: this.collection});
-        }
-
-        //render Google Maps
-        map_view.render();
     };
 
 };

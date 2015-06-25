@@ -5,7 +5,8 @@ define([
     'models/task'
 ], function(_, Backbone, taskModel){
     var taskCollection = Backbone.Collection.extend({
-        model: taskModel
+        model: taskModel,
+        url: 'includes/data/tasks.php?method=get'
     });
 
     return taskCollection;

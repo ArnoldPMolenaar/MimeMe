@@ -7,7 +7,8 @@ require.config({
         'instagram': { deps:['jquery'] },
         'errorhandler': { deps:['jquery'] },
         'taskshandler': { deps:['jquery'] },
-        'eventhandler': { deps:['jquery'] }
+        'eventhandler': { deps:['jquery'] },
+        'googlemaps': { deps:['jquery'] }
     },
     paths:{
         jquery: 'libs/jquery',
@@ -21,7 +22,8 @@ require.config({
         'errorhandler': 'classes/ErrorHandler',
         'cookiehandler': 'classes/CookieHandler',
         'taskshandler': 'classes/TasksHandler',
-        'eventhandler': 'classes/EventHandler'
+        'eventhandler': 'classes/EventHandler',
+        'googlemaps': 'classes/GoogleMaps'
     }
 });
 
@@ -46,7 +48,8 @@ define([
     'errorhandler',
     'cookiehandler',
     'taskshandler',
-    'eventhandler'
+    'eventhandler',
+    'googlemaps'
 ], function($, _, Backbone){
     //pass in jQuery, underscore and backbone
     return {};
